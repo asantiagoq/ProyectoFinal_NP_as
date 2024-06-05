@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+
+
 public class LoginFragment extends Fragment {
+
+
+
+    private FragmentManager fragmentManager = null;
+    private RegisterFragment registerFragment = null;
+    private FragmentTransaction fragmentTransaction = null;
+
 
     private EditText edtCorreo;
     private EditText edtContraseña;
@@ -33,6 +43,8 @@ public class LoginFragment extends Fragment {
         btnIngresar = view.findViewById(R.id.btnIngresar);
         btnCrearCuenta = view.findViewById(R.id.btnCrearCuenta);
 
+
+
         btnIngresar.setOnClickListener(v -> {
             String correo = edtCorreo.getText().toString();
             String contraseña = edtContraseña.getText().toString();
@@ -45,28 +57,18 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(getActivity(), "Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show();
             }
         });
-        btnCrearCuenta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Obtén el FragmentManager
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
-                // Crea una instancia del RegisterFragment
-                RegisterFragment registerFragment = new RegisterFragment();
 
-                // Inicia una transacción de fragmentos
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-                // Reemplaza el fragmento actual con el RegisterFragment
-                transaction.replace(R.id.login_fragment_container, registerFragment);
-
-                // Agrega la transacción al back stack
-                transaction.addToBackStack(null);
-
-                // Confirma la transacción
-                transaction.commit();
+        btnCrearCuenta.setOnClickListener(v -> {
+            if (getActivity() instanceof LoginActivity) {
+                ((LoginActivity) getActivity()).replaceFragment(new RegisterFragment(), true);
+            } else {
+                Toast.makeText(getActivity(), "Error: No se puede cambiar de fragmento", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
 
 
         return view;
