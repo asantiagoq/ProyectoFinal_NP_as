@@ -19,7 +19,9 @@
         android:id="@+id/login_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/main_fragment_container" />
+        app:layout_constraintBottom_toTopOf="@+id/main_fragment_container">
+
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

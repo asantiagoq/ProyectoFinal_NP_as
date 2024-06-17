@@ -49,7 +49,7 @@ public class LoginFragment extends Fragment {
             String correo = edtCorreo.getText().toString();
             String contraseña = edtContraseña.getText().toString();
 
-            if (correo.equals("user@example.com") && contraseña.equals("password")) {
+            if (correo.equals("admin") && contraseña.equals("admin")) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();
