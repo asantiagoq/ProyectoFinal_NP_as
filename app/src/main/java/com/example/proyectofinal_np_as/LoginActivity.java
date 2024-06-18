@@ -13,7 +13,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private FrameLayout loginContainer;
     private FrameLayout registerContainer;
-
     private FragmentManager fragmentManager = null;
     private FragmentTransaction fragmentTransaction = null;
 

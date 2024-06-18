@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.example.proyectofinal_np_as.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ListaObrasFragment#newInstance} factory method to
@@ -17,8 +20,7 @@ import com.example.proyectofinal_np_as.R;
  */
 public class ListaObrasFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private List<Obra> listsObras = new ArrayList<Obra>();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
