@@ -14,11 +14,13 @@ import com.example.proyectofinal_np_as.Fragments.HomeFragment;
 import com.example.proyectofinal_np_as.Fragments.InformacionObraFragment;
 import com.example.proyectofinal_np_as.Fragments.ListaObrasFragment;
 import com.example.proyectofinal_np_as.Fragments.MapaGaleriaFragment;
+import com.example.proyectofinal_np_as.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
+    ActivityMainBinding binding;
     private FragmentManager fragmentManager = null;
     private FragmentTransaction fragmentTransaction = null;
     private MapaGaleriaFragment mapaGaleriaFragment = null;
@@ -27,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

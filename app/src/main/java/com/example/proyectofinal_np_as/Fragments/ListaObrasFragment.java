@@ -75,9 +75,9 @@ public class ListaObrasFragment extends Fragment {
     private void setupRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        binding.rvObras.setLayoutManager();
+//        binding.rvObras.setLayoutManager();
         listAdapter = new ListaAdapter(listaObras);
-        binding.rvObras.setAdapter(listAdapter);
+//        binding.rvObras.setAdapter(listAdapter);
 
     }
 }
