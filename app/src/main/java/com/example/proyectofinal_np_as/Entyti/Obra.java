@@ -1,18 +1,19 @@
-package com.example.proyectofinal_np_as.Fragments;
-
-import android.graphics.Bitmap;
+package com.example.proyectofinal_np_as.Entyti;
 
 public class Obra {
     private String name;
-    private Bitmap imagen;
+    private int imagen;
     private String descripcion;
     private String audioUrl;
 
-    public Obra(String name, String descripcion){
+    public Obra(String name){
         this.name = name;
-        this.descripcion = descripcion;
     }
-    public Obra(String name, Bitmap imagen, String descripcion, String audioUrl) {
+    public Obra(String name, int imagen){
+        this.name = name;
+        this.imagen = imagen;
+    }
+    public Obra(String name, int imagen, String descripcion, String audioUrl) {
         this.name = name;
         this.imagen = imagen;
         this.descripcion = descripcion;
@@ -27,11 +28,11 @@ public class Obra {
         this.name = name;
     }
 
-    public Bitmap getImagen() {
+    public int getImagen() {
         return imagen;
     }
 
-    public void setImagen(Bitmap imagen) {
+    public void setImagen(int imagen) {
         this.imagen = imagen;
     }
 
