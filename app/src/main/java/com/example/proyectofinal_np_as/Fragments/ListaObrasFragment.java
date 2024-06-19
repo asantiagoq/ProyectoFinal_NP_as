@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.example.proyectofinal_np_as.ListaAdapter;
 import com.example.proyectofinal_np_as.R;
+import com.example.proyectofinal_np_as.databinding.FragmentListaObrasBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ import java.util.List;
  */
 public class ListaObrasFragment extends Fragment {
 
-
+    FragmentListaObrasBinding binding;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -68,16 +69,17 @@ public class ListaObrasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        binding = FragmentListaObrasBinding.inflate(getLayoutInflater());
+        View vista = binding.getRoot();
         return inflater.inflate(R.layout.fragment_lista_obras, container, false);
     }
 
     private void setupRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        binding.rvObras.setLayoutManager();
+        binding.rvObras.setLayoutManager(linearLayoutManager);
         listAdapter = new ListaAdapter(listaObras);
-//        binding.rvObras.setAdapter(listAdapter);
+        binding.rvObras.setAdapter(listAdapter);
 
     }
 }

@@ -1,5 +1,6 @@
 package com.example.proyectofinal_np_as;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,7 +22,8 @@ public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> 
     @NonNull
     @Override
     public ListaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_obras, parent,false);
+        return new ViewHolder(vista);
     }
 
     @Override
@@ -35,6 +37,7 @@ public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
