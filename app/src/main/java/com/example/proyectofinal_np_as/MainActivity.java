@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.proyectofinal_np_as.Fragments.HomeFragment;
-import com.example.proyectofinal_np_as.Fragments.InformacionObraFragment;
 import com.example.proyectofinal_np_as.Fragments.ListaObrasFragment;
+import com.example.proyectofinal_np_as.Fragments.LoginFragment;
 import com.example.proyectofinal_np_as.Fragments.MapaGaleriaFragment;
 import com.example.proyectofinal_np_as.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

@@ -1,4 +1,4 @@
-package com.example.proyectofinal_np_as;
+package com.example.proyectofinal_np_as.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.proyectofinal_np_as.Fragments.LoginFragment;
+import com.example.proyectofinal_np_as.LoginActivity;
+import com.example.proyectofinal_np_as.R;
 
 public class RegisterFragment extends Fragment {
 

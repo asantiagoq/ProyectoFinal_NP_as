@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.proyectofinal_np_as.Fragments.LoginFragment;
+
 public class LoginActivity extends AppCompatActivity {
 
     private FrameLayout loginContainer;

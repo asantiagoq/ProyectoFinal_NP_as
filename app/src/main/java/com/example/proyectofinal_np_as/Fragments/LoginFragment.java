@@ -1,4 +1,4 @@
-package com.example.proyectofinal_np_as;
+package com.example.proyectofinal_np_as.Fragments;
 
 
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.proyectofinal_np_as.LoginActivity;
+import com.example.proyectofinal_np_as.MainActivity;
+import com.example.proyectofinal_np_as.R;
 
 
 public class LoginFragment extends Fragment {

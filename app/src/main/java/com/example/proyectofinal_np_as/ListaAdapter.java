@@ -13,7 +13,88 @@ import com.example.proyectofinal_np_as.Entyti.Obra;
 
 import java.util.List;
 
-public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> {
+public class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> {
 
     List<Obra> listaObras;
 

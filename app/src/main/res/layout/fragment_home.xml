@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="302dp"
+        android:layout_height="214dp"
+        android:src="@drawable/logo_cc_unsa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="334dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="185dp"
+        android:text="Sobre Nosotros"
+        android:textSize="35sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="200dp"
+        android:layout_height="443dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="250dp"
+        android:text="El Centro Cultural de la Universidad Nacional de San Agustín de Arequipa, es parte de la Oficina Universitaria de Promoción y Desarrollo Cultural.  Desarrolla sus actividades en la calle Santa Catalina 101 en la Casona que perteneció a Don Juan Bautista Arróspide y Beláustegui quien la adquiere y concluye a fin del siglo XVIII, construcción iniciada en 1743 por doña María Gregoria Vda. de Benavides y Moscoso para ser Palacio Episcopal, aquí vivió el Obispo Don Pedro Chaves de la Rosa Galván y Amado durante algún tiempo se llamó “Palacio de la Inmaculada Concepción” en 1851, fue afectada y se le llamó “Casa Quemada”.  En 1898 se transfirió la propiedad a Don Simón Yrriberry y posteriormente al Arzobispado de Arequipa."
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="161dp"
+        android:layout_height="709dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="7dp"
+        android:src="@drawable/cara"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
