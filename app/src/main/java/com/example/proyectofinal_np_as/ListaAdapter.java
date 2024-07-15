@@ -13,107 +13,41 @@ import com.example.proyectofinal_np_as.Entyti.Obra;
 
 import java.util.List;
 
-public class
+public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> {
 
+    private List<Obra> listaObras;
+    private OnItemClickListener onItemClickListener;
 
+    public interface OnItemClickListener {
+        void onItemClick(Obra obra);
+    }
 
+    public ListaAdapter(List<Obra> listaObras) {
+        this.listaObras = listaObras;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> {
-
-    List<Obra> listaObras;
-
-    public ListaAdapter(List<Obra> listaObras){
-        this.listaObras  = listaObras;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
     @Override
-    public ListaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_obras, parent,false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_obras, parent, false);
         return new ViewHolder(vista);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListaAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Obra obra = listaObras.get(position);
         holder.imgObra.setImageResource(obra.getImagen());
         holder.nombreObra.setText(obra.getName().toUpperCase());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(obra);
+            }
+        });
     }
 
     @Override
@@ -124,6 +58,7 @@ ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView nombreObra;
         ImageView imgObra;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nombreObra = itemView.findViewById(R.id.nombreObra);
