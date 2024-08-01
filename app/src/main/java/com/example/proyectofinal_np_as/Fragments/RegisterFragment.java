@@ -50,7 +50,6 @@ public class RegisterFragment extends Fragment {
             }
 
             if (checkBox.isChecked()) {
-                // Aquí puedes agregar el código para registrar al usuario en tu base de datos
                 Toast.makeText(getActivity(), "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
                 ((LoginActivity) getActivity()).replaceFragment(new LoginFragment(), false);
             } else {
