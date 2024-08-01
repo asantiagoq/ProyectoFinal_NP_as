@@ -18,6 +18,11 @@ public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> 
     private List<Obra> listaObras;
     private OnItemClickListener onItemClickListener;
 
+    public void filterList(List<Obra> filteredList) {
+        listaObras = filteredList;
+        notifyDataSetChanged();
+    }
+
     public interface OnItemClickListener {
         void onItemClick(Obra obra);
     }

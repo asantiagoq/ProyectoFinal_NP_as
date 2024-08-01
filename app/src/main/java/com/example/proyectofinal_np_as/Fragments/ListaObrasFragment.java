@@ -2,17 +2,17 @@ package com.example.proyectofinal_np_as.Fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.proyectofinal_np_as.Entyti.Obra;
 import com.example.proyectofinal_np_as.ListaAdapter;
@@ -28,8 +28,9 @@ public class ListaObrasFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private SearchView searchView;
     private List<Obra> bd;
-    private List<Obra> listaObras = new ArrayList<Obra>();
+    private List<Obra> listaObras = new ArrayList<>();
     private ListaAdapter listAdapter;
     private String mParam1;
     private String mParam2;
@@ -55,7 +56,7 @@ public class ListaObrasFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        bd = new ArrayList<Obra>();
+        bd = new ArrayList<>();
         addObras(bd);
     }
 
@@ -70,6 +71,7 @@ public class ListaObrasFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupRecyclerView();
+        setupSearchView();
     }
 
     private void setupRecyclerView() {
@@ -86,6 +88,34 @@ public class ListaObrasFragment extends Fragment {
             transaction.addToBackStack(null);
             transaction.commit();
         });
+    }
+
+    private void setupSearchView() {
+        searchView = binding.txtBuscar;
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return false;
+            }
+        });
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void filter(String text) {
+        List<Obra> filteredList = new ArrayList<>();
+        for (Obra item : bd) { // usa bd en lugar de listaObras para filtrar
+            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+        listAdapter.filterList(filteredList);
     }
 
     @SuppressLint("NotifyDataSetChanged")
