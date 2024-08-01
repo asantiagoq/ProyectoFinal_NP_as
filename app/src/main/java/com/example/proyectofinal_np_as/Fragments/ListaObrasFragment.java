@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,6 +97,10 @@ public class ListaObrasFragment extends Fragment {
         list.add(new Obra("Básica", R.drawable.imagen));
 
         listaObras.addAll(list);
-        listAdapter.notifyDataSetChanged();
+        if (listAdapter != null) {
+            listAdapter.notifyDataSetChanged(); // Verifica que listaAdapter no sea null
+        } else {
+            Log.e("ListaObrasFragment", "listaAdapter es null!");
+        }
     }
 }
