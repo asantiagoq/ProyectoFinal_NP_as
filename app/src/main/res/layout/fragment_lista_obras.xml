@@ -5,11 +5,13 @@
     android:id="@+id/listaObras"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EED3BE"
     tools:context=".Fragments.ListaObrasFragment">
 
     <SearchView
         android:id="@+id/txtBuscar"
         android:layout_width="match_parent"
+        android:background="#601E20"
         android:layout_height="wrap_content"
         />
 
