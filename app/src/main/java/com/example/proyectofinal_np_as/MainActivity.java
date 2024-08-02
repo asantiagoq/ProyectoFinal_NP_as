@@ -1,6 +1,5 @@
 package com.example.proyectofinal_np_as;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,32 +16,21 @@ import com.example.proyectofinal_np_as.Entyti.Galeria;
 import com.example.proyectofinal_np_as.Entyti.Obra;
 import com.example.proyectofinal_np_as.Fragments.HomeFragment;
 import com.example.proyectofinal_np_as.Fragments.ListaObrasFragment;
-import com.example.proyectofinal_np_as.Fragments.LoginFragment;
 import com.example.proyectofinal_np_as.Fragments.MapaGaleriaFragment;
 import com.example.proyectofinal_np_as.Fragments.MapaSalaFragment;
 import com.example.proyectofinal_np_as.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
-
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-
 public class MainActivity extends AppCompatActivity implements MapaDibujo.OnGalleryClickListener {
 
-
-    ActivityMainBinding binding;
-    private FragmentManager fragmentManager = null;
-    private FragmentTransaction fragmentTransaction = null;
-    private MapaGaleriaFragment mapaGaleriaFragment = null;
-    private ListaObrasFragment listaObrasFragment = null;
-    private HomeFragment homeFragment = null;
-
+    private ActivityMainBinding binding;
+    private FragmentManager fragmentManager;
     private AppDatabase db;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,55 +38,57 @@ public class MainActivity extends AppCompatActivity implements MapaDibujo.OnGall
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Inicializar la base de datos
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "galeria-db")
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build();
         populateDatabaseFromTxt(db);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_fragment_container, new LoginFragment())
-                    .commit();
-        }
-
+        // Configuración del FragmentManager
         fragmentManager = getSupportFragmentManager();
 
+        // Configurar BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
-        bottomNavigationView.setSelectedItemId(R.id.menu_home);
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.menu_home) {
-                    homeFragment = HomeFragment.newInstance("", "");
-                    loadFragment(homeFragment);
-                    return true;
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment = null;
 
-                } else if (menuItem.getItemId() == R.id.menu_cuadros) {
-                    listaObrasFragment = ListaObrasFragment.newInstance("", "");
-                    loadFragment(listaObrasFragment);
-                    return true;
-                } else if (menuItem.getItemId() == R.id.menu_mapa) {
-                    mapaGaleriaFragment = MapaGaleriaFragment.newInstance("", "");
-                    loadFragment(mapaGaleriaFragment);
-                    return true;
-                } else
-                    return false;
+                // Verificar el ID del ítem seleccionado y asignar el fragmento adecuado
+                if (item.getItemId() == R.id.menu_home) {
+                    fragment = HomeFragment.newInstance("", "");
+                } else if (item.getItemId() == R.id.menu_cuadros) {
+                    fragment = ListaObrasFragment.newInstance("", "");
+                } else if (item.getItemId() == R.id.menu_mapa) {
+                    fragment = MapaGaleriaFragment.newInstance("", "");
+                }
 
+                // Si se ha asignado un fragmento, cargarlo
+                if (fragment != null) {
+                    loadFragment(fragment);
+                    return true;
+                }
+
+                return false;
             }
         });
-    }
 
-    private void loadFragment(Fragment fragment) {
-        if (fragmentManager != null) {
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.main_fragment_container, fragment);
-            fragmentTransaction.commit();
+        // Cargar fragmento inicial si es la primera vez
+        if (savedInstanceState == null) {
+            bottomNavigationView.setSelectedItemId(R.id.menu_home); // Asegúrate de que este ID esté en el archivo de menú
         }
     }
 
+    // Método para cargar fragmentos
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.main_fragment_container, fragment);
+        transaction.addToBackStack(null); // Opcional: Añadir a la pila de retroceso
+        transaction.commit();
+    }
 
+    // Método para poblar la base de datos desde un archivo de texto
     private void populateDatabaseFromTxt(AppDatabase db) {
         new Thread(() -> {
             try {
@@ -159,12 +149,9 @@ public class MainActivity extends AppCompatActivity implements MapaDibujo.OnGall
         }).start();
     }
 
-
     @Override
     public void onGalleryClick(String galleryName) {
-        MapaSalaFragment mapaSalaFragment = MapaSalaFragment.newInstance(galleryName, "");
+        Fragment mapaSalaFragment = MapaSalaFragment.newInstance(galleryName, "");
         loadFragment(mapaSalaFragment);
     }
-
-
 }
