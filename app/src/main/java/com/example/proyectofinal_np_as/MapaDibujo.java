@@ -1,10 +1,12 @@
 package com.example.proyectofinal_np_as;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -17,9 +19,19 @@ public class MapaDibujo extends View {
     private int marginLeft;
     private int marginTop;
 
+    public interface OnGalleryClickListener {
+        void onGalleryClick(String galleryName);
+    }
+
+    private OnGalleryClickListener listener;
+
     public MapaDibujo(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
+    }
+
+    public void setOnGalleryClickListener(OnGalleryClickListener listener) {
+        this.listener = listener;
     }
 
     private void init() {
@@ -113,5 +125,42 @@ public class MapaDibujo extends View {
         canvas.drawRect(marginLeft + 9 * cellSize, marginTop + 6 * cellSize, marginLeft + 14 * cellSize, marginTop + 10 * cellSize, paint);
         // Patio 3
         canvas.drawRect(marginLeft + 19 * cellSize, marginTop + 6 * cellSize, marginLeft + 29 * cellSize, marginTop + 14 * cellSize, paint);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            float x = event.getX();
+            float y = event.getY();
+
+            String galleryName = getGalleryAtPosition(x, y);
+            if (galleryName != null && listener != null) {
+                listener.onGalleryClick(galleryName);
+            }
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    private String getGalleryAtPosition(float x, float y) {
+        int col = (int) ((x - marginLeft) / cellSize);
+        int row = (int) ((y - marginTop) / cellSize);
+
+        if (col >= 15 && col < 20 && row >= 1 && row < 5) {
+            return "G. V";
+        } else if (col >= 20 && col < 32 && row >= 1 && row < 5) {
+            return "G. IV";
+        } else if (col >= 5 && col < 9 && row >= 6 && row < 13) {
+            return "G. VII";
+        } else if (col >= 9 && col < 14 && row >= 10 && row < 13) {
+            return "G. VI";
+        } else if (col >= 16 && col < 19 && row >= 6 && row < 14) {
+            return "G. III";
+        } else if (col >= 16 && col < 29 && row >= 14 && row < 17) {
+            return "G. II";
+        } else if (col >= 29 && col < 32 && row >= 6 && row < 17) {
+            return "G. I";
+        }
+        return null;
     }
 }
