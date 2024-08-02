@@ -13,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.room.Room;
 
+import com.example.proyectofinal_np_as.AppDatabase;
 import com.example.proyectofinal_np_as.Entyti.Obra;
 import com.example.proyectofinal_np_as.ListaAdapter;
 import com.example.proyectofinal_np_as.R;
@@ -57,21 +59,21 @@ public class ListaObrasFragment extends Fragment {
         }
 
         bd = new ArrayList<>();
-        addObras(bd);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentListaObrasBinding.inflate(inflater, container, false);
+        setupRecyclerView();
+        addObras(bd); // Mueve esta llamada aquí
+        setupSearchView();
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupRecyclerView();
-        setupSearchView();
     }
 
     private void setupRecyclerView() {
@@ -119,18 +121,24 @@ public class ListaObrasFragment extends Fragment {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void addObras(List<Obra> list) {
-        list.add(new Obra("Monalisa", R.drawable.imagen));
-        list.add(new Obra("Pintura", R.drawable.imagen));
-        list.add(new Obra("Escultura", R.drawable.imagen));
-        list.add(new Obra("Sangrienta", R.drawable.imagen));
-        list.add(new Obra("Básica", R.drawable.imagen));
+    public void addObras(List<Obra> bd) {
+        // Obtén una instancia de la base de datos
+        AppDatabase db = Room.databaseBuilder(getContext().getApplicationContext(),
+                AppDatabase.class, "galeria-db").allowMainThreadQueries().build();
 
-        listaObras.addAll(list);
-        if (listAdapter != null) {
-            listAdapter.notifyDataSetChanged(); // Verifica que listaAdapter no sea null
-        } else {
-            Log.e("ListaObrasFragment", "listaAdapter es null!");
-        }
-    }
+        // Carga las obras en un hilo separado
+        new Thread(() -> {
+            List<Obra> obras = db.obraDao().getAll(); // Obtén todas las obras desde la base de datos
+
+            getActivity().runOnUiThread(() -> {
+                listaObras.clear();
+                listaObras.addAll(obras);
+                if (listAdapter != null) {
+                    listAdapter.notifyDataSetChanged(); // Notifica al adaptador que los datos han cambiado
+                } else {
+                    Log.e("ListaObrasFragment", "listaAdapter es null!");
+                }
+            });
+        }).start();
+}
 }

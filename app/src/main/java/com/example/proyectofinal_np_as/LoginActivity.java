@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.proyectofinal_np_as.Fragments.LoginFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -17,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     private FrameLayout registerContainer;
     private FragmentManager fragmentManager = null;
     private FragmentTransaction fragmentTransaction = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
