@@ -13,6 +13,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="#FEF6F1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
@@ -27,10 +28,10 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#601E20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="0dp"
-        app:menu="@menu/menu_navegation"/>
+        app:menu="@menu/menu_navegation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

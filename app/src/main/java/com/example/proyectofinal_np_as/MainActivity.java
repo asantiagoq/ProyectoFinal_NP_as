@@ -1,6 +1,6 @@
 package com.example.proyectofinal_np_as;
 
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,16 +19,20 @@ import com.example.proyectofinal_np_as.Fragments.HomeFragment;
 import com.example.proyectofinal_np_as.Fragments.ListaObrasFragment;
 import com.example.proyectofinal_np_as.Fragments.LoginFragment;
 import com.example.proyectofinal_np_as.Fragments.MapaGaleriaFragment;
+import com.example.proyectofinal_np_as.Fragments.MapaSalaFragment;
 import com.example.proyectofinal_np_as.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements MapaDibujo.OnGalleryClickListener {
+
 
     ActivityMainBinding binding;
     private FragmentManager fragmentManager = null;
@@ -36,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private MapaGaleriaFragment mapaGaleriaFragment = null;
     private ListaObrasFragment listaObrasFragment = null;
     private HomeFragment homeFragment = null;
+
     private AppDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,20 +70,22 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.menu_home){
-                    homeFragment = HomeFragment.newInstance("","");
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    homeFragment = HomeFragment.newInstance("", "");
                     loadFragment(homeFragment);
                     return true;
-                } else if (menuItem.getItemId() == R.id.menu_cuadros){
-                    listaObrasFragment = ListaObrasFragment.newInstance("","");
+
+                } else if (menuItem.getItemId() == R.id.menu_cuadros) {
+                    listaObrasFragment = ListaObrasFragment.newInstance("", "");
                     loadFragment(listaObrasFragment);
                     return true;
-                } else if( menuItem.getItemId() == R.id.menu_mapa){
-                    mapaGaleriaFragment = MapaGaleriaFragment.newInstance("","");
+                } else if (menuItem.getItemId() == R.id.menu_mapa) {
+                    mapaGaleriaFragment = MapaGaleriaFragment.newInstance("", "");
                     loadFragment(mapaGaleriaFragment);
                     return true;
-                }
-                return false;
+                } else
+                    return false;
+
             }
         });
     }
@@ -89,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.commit();
         }
     }
+
 
     private void populateDatabaseFromTxt(AppDatabase db) {
         new Thread(() -> {
@@ -149,5 +158,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
+
+
+    @Override
+    public void onGalleryClick(String galleryName) {
+        MapaSalaFragment mapaSalaFragment = MapaSalaFragment.newInstance(galleryName, "");
+        loadFragment(mapaSalaFragment);
+    }
+
 
 }

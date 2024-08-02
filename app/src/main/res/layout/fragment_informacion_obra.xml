@@ -89,6 +89,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
+            android:background="#EED3BE"
             android:contentDescription="Escuchar Audio"
             android:src="@drawable/baseline_hearing_24" />
 
@@ -96,6 +97,7 @@
             android:id="@+id/btnStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#EED3BE"
             android:layout_weight="1"
             app:srcCompat="@drawable/baseline_pause_circle_outline_24" />
 
@@ -104,6 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:background="#EED3BE"
             android:layout_weight="1"
             android:contentDescription="Agregar a Favoritos"
             android:src="@drawable/baseline_favorite_border_24" />
