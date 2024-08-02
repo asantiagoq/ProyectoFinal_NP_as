@@ -22,7 +22,7 @@
         android:id="@+id/txtNombreObra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre de la Obra"
+        android:text="La Monalisa"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/txtTitle"
@@ -35,7 +35,7 @@
         android:layout_height="275dp"
         android:layout_marginTop="16dp"
         android:contentDescription="Imagen de la Obra"
-        android:src="@drawable/imagen"
+        android:src="@drawable/img001"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtNombreObra" />
@@ -44,7 +44,7 @@
         android:id="@+id/txtAutor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre del Autor"
+        android:text="Leonardo da Vinci"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/imgObra"
@@ -55,23 +55,12 @@
         android:id="@+id/txtDescripcionTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descripción:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/txtAutor"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="16dp"/>
-
-    <TextView
-        android:id="@+id/txtHistoriaTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="Historia:"
+        android:text="1503 - 1506 Es una obra maestra del Renacimiento italiano. La pintura muestra a una mujer con una enigmática sonrisa y un fondo paisajístico. Conocida por su técnica de sfumato, está expuesta en el Museo del Louvre en París y es una de las obras de arte más reconocidas en el mundo "
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescripcionTitulo" />
+        app:layout_constraintTop_toBottomOf="@id/txtAutor" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -80,8 +69,9 @@
         android:orientation="horizontal"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHistoriaTitulo">
+        app:layout_constraintTop_toBottomOf="@+id/txtDescripcionTitulo">
 
         <ImageButton
             android:id="@+id/btnPlay"
@@ -97,8 +87,8 @@
             android:id="@+id/btnStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#EED3BE"
             android:layout_weight="1"
+            android:background="#EED3BE"
             app:srcCompat="@drawable/baseline_pause_circle_outline_24" />
 
         <ImageButton
@@ -106,8 +96,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:background="#EED3BE"
             android:layout_weight="1"
+            android:background="#EED3BE"
             android:contentDescription="Agregar a Favoritos"
             android:src="@drawable/baseline_favorite_border_24" />
 

@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -14,9 +15,19 @@ public class MapaSalaDibujo extends View {
     private Paint textPaint;
     private String galleryName;
 
+    public interface OnCircleClickListener {
+        void onCircleClick(int circleIndex);
+    }
+
+    private OnCircleClickListener listener;
+
     public MapaSalaDibujo(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
+    }
+
+    public void setOnCircleClickListener(OnCircleClickListener listener) {
+        this.listener = listener;
     }
 
     private void init() {
@@ -83,6 +94,58 @@ public class MapaSalaDibujo extends View {
         if (galleryName != null) {
             canvas.drawText(galleryName, viewWidth / 2, (viewHeight / 2) - (textPaint.descent() + textPaint.ascent()) / 2, textPaint);
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            float x = event.getX();
+            float y = event.getY();
+
+            int circleIndex = getCircleIndexAtPosition(x, y);
+            if (circleIndex != -1 && listener != null) {
+                listener.onCircleClick(circleIndex);
+            }
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    private int getCircleIndexAtPosition(float x, float y) {
+        float radius = 50f;
+
+        // Círculo 1 (esquina superior izquierda)
+        float cx1 = 200;
+        float cy1 = 200;
+
+        // Círculo 2 (esquina inferior izquierda)
+        float cx2 = 200;
+        float cy2 = getHeight() - 200;
+
+        // Círculo 3 (esquina superior derecha)
+        float cx3 = getWidth() - 200;
+        float cy3 = 200;
+
+        // Círculo 4 (esquina inferior derecha)
+        float cx4 = getWidth() - 200;
+        float cy4 = getHeight() - 200;
+
+        if (isPointInsideCircle(x, y, cx1, cy1, radius)) {
+            return 0;
+        } else if (isPointInsideCircle(x, y, cx2, cy2, radius)) {
+            return 1;
+        } else if (isPointInsideCircle(x, y, cx3, cy3, radius)) {
+            return 2;
+        } else if (isPointInsideCircle(x, y, cx4, cy4, radius)) {
+            return 3;
+        }
+        return -1;
+    }
+
+    private boolean isPointInsideCircle(float px, float py, float cx, float cy, float radius) {
+        float dx = px - cx;
+        float dy = py - cy;
+        return dx * dx + dy * dy <= radius * radius;
     }
 
     public void setGalleryName(String galleryName) {

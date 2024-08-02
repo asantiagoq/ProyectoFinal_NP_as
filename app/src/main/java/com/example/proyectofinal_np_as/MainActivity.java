@@ -15,6 +15,7 @@ import com.example.proyectofinal_np_as.Entyti.Autor;
 import com.example.proyectofinal_np_as.Entyti.Galeria;
 import com.example.proyectofinal_np_as.Entyti.Obra;
 import com.example.proyectofinal_np_as.Fragments.HomeFragment;
+import com.example.proyectofinal_np_as.Fragments.InformacionObraFragment;
 import com.example.proyectofinal_np_as.Fragments.ListaObrasFragment;
 import com.example.proyectofinal_np_as.Fragments.MapaGaleriaFragment;
 import com.example.proyectofinal_np_as.Fragments.MapaSalaFragment;
@@ -154,4 +155,9 @@ public class MainActivity extends AppCompatActivity implements MapaDibujo.OnGall
         Fragment mapaSalaFragment = MapaSalaFragment.newInstance(galleryName, "");
         loadFragment(mapaSalaFragment);
     }
+    public void showInformacionObraFragment() {
+        Fragment informacionObraFragment = InformacionObraFragment.newInstance("param1", "param2");
+        loadFragment(informacionObraFragment);
+    }
+
 }
